@@ -93,8 +93,10 @@ code{font:500 13px 'JetBrains Mono',monospace;background:#f3f1ec;padding:2px 6px
 <script>
 (function () {
   'use strict';
+  // No crossOrigin flag here: logo.webp loads as a plain same-directory file.
+  // Setting crossOrigin='anonymous' on a file:// page makes some browsers refuse
+  // the load outright, which silently drops the logo from every export below.
   var logo = new Image();
-  logo.crossOrigin = 'anonymous';
   logo.src = '../logo.webp';
 
   function nums() {
