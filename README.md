@@ -154,8 +154,13 @@ Then **Settings → Pages → Source: Deploy from a branch → `main` / `/ (root
 Live at `https://<you>.github.io/<repo>/` in a minute or two.
 
 - `.nojekyll` is already present, so files are served exactly as committed.
-- For a custom domain, add a `CNAME` file containing just `www.corehrmanagement.com`,
-  and point a `CNAME` DNS record at `<you>.github.io`.
+- For the custom domain, add a `CNAME` file containing just `corehrmanagement.in`,
+  then point DNS at GitHub Pages: four `A` records for the apex
+  (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`) and a `CNAME`
+  record for `www` pointing at `aash591.github.io`.
+  **Add the CNAME file only once DNS resolves** — GitHub starts redirecting
+  the `github.io` URL to the custom domain as soon as the file lands, so an
+  unconfigured domain takes the site offline until DNS catches up.
 - Note that GitHub Pages ignores `_headers` and `vercel.json`.
 
 ### Cloudflare Pages — best free tier of the three
