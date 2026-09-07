@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Core HR — brand asset export</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#17181c;--ink-3:#62666e;--paper:#f8f7f4;--red:#C8102E;--line:rgba(23,24,28,.14)}
+body{font:500 15px/1.6 'Manrope',sans-serif;color:#3f424a;background:var(--paper);padding:clamp(24px,5vw,56px)}
+.wrap{max-width:1000px;margin-inline:auto}
+h1{font:700 clamp(1.6rem,4vw,2.2rem)/1.1 'Sora',sans-serif;color:var(--ink);letter-spacing:-.03em;margin-bottom:10px}
+.sub{color:var(--ink-3);margin-bottom:32px;max-width:64ch}
+h2{font:600 17px 'Sora',sans-serif;color:var(--ink);letter-spacing:-.02em;margin:0 0 6px}
+section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px}
+.note{font-size:13.5px;color:var(--ink-3);margin-bottom:18px}
+.row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+button{
+  font:600 14px 'Manrope',sans-serif;padding:11px 18px;border-radius:11px;border:1px solid transparent;
+  background:var(--red);color:#fff;cursor:pointer;transition:background .2s,transform .15s;
+}
+button:hover{background:#a30d25;transform:translateY(-1px)}
+button.ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+canvas{border:1px solid var(--line);border-radius:10px;background:#fff;max-width:100%;height:auto}
+.previews{display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap;margin-bottom:20px}
+.pv{text-align:center}
+.pv span{display:block;margin-top:8px;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.tile{position:relative;overflow:hidden;background:#fff;border-radius:10px;box-shadow:0 0 0 1px var(--line)}
+.tile img{position:absolute;top:-10.2%;left:-32.4%;height:177%;width:auto;max-width:none}
+.t16{width:18px;height:16px;border-radius:4px}
+.t32{width:35px;height:32px;border-radius:7px}
+.t44{width:44px;height:40px}
+.t96{width:106px;height:96px;border-radius:20px}
+.dark{background:#141519;padding:18px;border-radius:14px;display:inline-block}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:18px}
+label{display:block;font:600 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+input[type=number]{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;font:500 14px 'Manrope',sans-serif}
+code{font:500 13px 'JetBrains Mono',monospace;background:#f3f1ec;padding:2px 6px;border-radius:5px}
+.err{color:var(--red);font-size:13.5px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Brand asset export</h1>
+  <p class="sub">A local helper — not part of the published site. It reads <code>../logo.webp</code>, crops the emblem out of the lockup, and exports the square assets the site needs. Open this file in a browser from the project folder, then save each download into the project root.</p>
+
+  <section>
+    <h2>1 · Check the crop</h2>
+    <p class="note">These tiles use exactly the same crop numbers as the live header. The emblem should sit centred with a little breathing room, and no sliver of the &ldquo;CORE HR&rdquo; wordmark at the bottom. If it looks off, nudge the values below and copy them into <code>index.html</code>.</p>
+    <div class="previews">
+      <div class="pv"><div class="tile t16"><img id="p16" src="../logo.webp" alt=""></div><span>16px</span></div>
+      <div class="pv"><div class="tile t32"><img id="p32" src="../logo.webp" alt=""></div><span>32px</span></div>
+      <div class="pv"><div class="tile t44"><img id="p44" src="../logo.webp" alt=""></div><span>header 44&times;40</span></div>
+      <div class="pv"><div class="tile t96"><img id="p96" src="../logo.webp" alt=""></div><span>96px</span></div>
+      <div class="pv"><div class="dark"><div class="tile t44"><img id="pd" src="../logo.webp" alt=""></div></div><span>on footer dark</span></div>
+    </div>
+    <div class="controls">
+      <div><label>crop left %</label><input type="number" id="cx" value="20.13" step="0.5"></div>
+      <div><label>crop top %</label><input type="number" id="cy" value="5.75" step="0.5"></div>
+      <div><label>crop size %</label><input type="number" id="cs" value="62.15" step="0.5"></div>
+    </div>
+    <div class="row">
+      <button class="ghost" id="apply">Apply to previews</button>
+      <button class="ghost" id="css">Copy the CSS for index.html</button>
+    </div>
+    <p class="err" id="cssOut"></p>
+  </section>
+
+  <section>
+    <h2>2 · Favicons</h2>
+    <p class="note">Save these into the project root, then follow the swap instructions in <code>README.md</code>.</p>
+    <div class="row">
+      <button data-ico="32">favicon-32.png</button>
+      <button data-ico="180">apple-touch-icon.png (180)</button>
+      <button data-ico="512">icon-512.png</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>3 · Social share image</h2>
+    <p class="note">1200&times;630 card used by WhatsApp, LinkedIn and X when someone shares the link. Save it to the project root as <code>og-cover.png</code>.</p>
+    <div class="row" style="margin-bottom:16px">
+      <button id="og">Download og-cover.png</button>
+    </div>
+    <canvas id="cv" width="1200" height="630" style="width:100%;max-width:620px"></canvas>
+  </section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var logo = new Image();
+  logo.crossOrigin = 'anonymous';
+  logo.src = '../logo.webp';
+
+  function nums() {
+    return {
+      x: parseFloat(document.getElementById('cx').value) / 100,
+      y: parseFloat(document.getElementById('cy').value) / 100,
+      s: parseFloat(document.getElementById('cs').value) / 100
+    };
+  }
+
+  /* Tiles are width:height = 1.1, so the visible crop is s wide by s/1.1 tall. */
+  function applyPreviews() {
+    var n = nums(), hPct = (1 / (n.s / 1.1)) * 100;
+    ['p16', 'p32', 'p44', 'p96', 'pd'].forEach(function (id) {
+      var im = document.getElementById(id);
+      im.style.height = hPct.toFixed(2) + '%';
+      im.style.top = (-n.y * hPct).toFixed(2) + '%';
+      im.style.left = (-n.x * (1 / n.s) * 100).toFixed(2) + '%';
+    });
+  }
+  document.getElementById('apply').addEventListener('click', applyPreviews);
+
+  document.getElementById('css').addEventListener('click', function () {
+    var n = nums(), hPct = (1 / (n.s / 1.1)) * 100;
+    var css = '.brand-logo img{position:absolute;top:' + (-n.y * hPct).toFixed(1) + '%;left:' +
+      (-n.x * (1 / n.s) * 100).toFixed(1) + '%;height:' + hPct.toFixed(0) + '%;width:auto;max-width:none}';
+    document.getElementById('cssOut').textContent = css;
+    if (navigator.clipboard) navigator.clipboard.writeText(css);
+  });
+
+  function save(canvas, name) {
+    canvas.toBlob(function (b) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(b);
+      a.download = name;
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    }, 'image/png');
+  }
+
+  /* square icon: emblem centred on white, with padding */
+  document.querySelectorAll('[data-ico]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var size = +btn.getAttribute('data-ico');
+      var n = nums(), S = logo.naturalWidth;
+      var c = document.createElement('canvas');
+      c.width = c.height = size;
+      var g = c.getContext('2d');
+      g.fillStyle = '#fff';
+      g.fillRect(0, 0, size, size);
+      var side = n.s * S;                       /* square source region */
+      var pad = size * 0.06;
+      g.drawImage(logo, n.x * S, (n.y - 0.03) * S, side, side,
+        pad, pad, size - pad * 2, size - pad * 2);
+      save(c, size === 180 ? 'apple-touch-icon.png' : 'icon-' + size + '.png');
+    });
+  });
+
+  /* 1200x630 social card */
+  function drawOg() {
+    var c = document.getElementById('cv'), g = c.getContext('2d');
+    var W = 1200, H = 630;
+    g.fillStyle = '#f8f7f4';
+    g.fillRect(0, 0, W, H);
+
+    g.fillStyle = 'rgba(23,24,28,.075)';
+    for (var y = 18; y < H; y += 26) {
+      for (var x = 18; x < W; x += 26) {
+        g.beginPath(); g.arc(x, y, 1.5, 0, 6.29); g.fill();
+      }
+    }
+    g.fillStyle = '#C8102E';
+    g.fillRect(0, 0, W, 9);
+
+    if (logo.naturalWidth) {
+      var n = nums(), S = logo.naturalWidth, side = n.s * S, box = 132;
+      g.save();
+      g.fillStyle = '#fff';
+      g.beginPath();
+      if (g.roundRect) { g.roundRect(78, 74, box, box, 26); } else { g.rect(78, 74, box, box); }
+      g.fill();
+      g.clip();
+      g.drawImage(logo, n.x * S, (n.y - 0.03) * S, side, side, 78 + 8, 74 + 8, box - 16, box - 16);
+      g.restore();
+    }
+
+    g.fillStyle = '#17181c';
+    g.font = '700 74px Sora, sans-serif';
+    g.fillText('HR. Payroll. Compliance.', 78, 320);
+    g.fillStyle = '#C8102E';
+    g.font = '700 74px Sora, sans-serif';
+    g.fillText('Simplified.', 78, 404);
+
+    g.fillStyle = '#62666e';
+    g.font = '500 27px Manrope, sans-serif';
+    g.fillText('Payroll · PF · ESI · PT · LWF · Registrations · Audits · Training', 78, 470);
+
+    g.fillStyle = '#17181c';
+    g.font = '600 23px Manrope, sans-serif';
+    g.fillText('CORE HR MANAGEMENT', 78, 552);
+    g.fillStyle = '#62666e';
+    g.font = '500 21px Manrope, sans-serif';
+    g.fillText('Edappally, Ernakulam, Kerala — serving businesses across India', 78, 586);
+  }
+
+  document.getElementById('og').addEventListener('click', function () {
+    drawOg();
+    save(document.getElementById('cv'), 'og-cover.png');
+  });
+
+  logo.onload = function () { applyPreviews(); setTimeout(drawOg, 300); };
+  logo.onerror = function () {
+    document.getElementById('cssOut').textContent =
+      'Could not load ../logo.webp — open this file from inside the project folder.';
+  };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Core HR Management
+User-agent: *
+Allow: /
+
+# Update this host before launch if you deploy on a different domain.
+Sitemap: https://www.corehrmanagement.com/sitemap.xml
