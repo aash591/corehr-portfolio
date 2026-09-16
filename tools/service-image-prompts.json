@@ -1,0 +1,62 @@
+{
+  "generator": "Built-in image_gen tool",
+  "style": "Corporate photography with blue and cyan digital overlays, guided by the supplied visual reference.",
+  "export": {
+    "format": "WebP",
+    "width": 960,
+    "height": 640,
+    "quality": 86
+  },
+  "images": [
+    {
+      "name": "payroll",
+      "output": "assets/images/services/payroll-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: wide 3:2 photographic image for a payroll service website card. Create a premium realistic corporate technology photograph: close-up of an Indian payroll specialist's hands using a laptop and calculator on a real office desk, with tasteful luminous cyan holographic salary rows, rupee currency symbol and a circular payment approval interface suspended above the keyboard. Deep navy and cool blue photography, natural office light, subtle cyan glow, polished enterprise advertising, similar to business technology stock photography with digital HUD overlays. Landscape composition, subject clearly readable at small card size, frame edge to edge. No text, no labels, no logo, no watermark, no 3D clay illustration, no isolated icon. One single photograph."
+    },
+    {
+      "name": "provident-fund",
+      "output": "assets/images/services/provident-fund-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: An Indian financial adviser and employee reviewing retirement savings on a laptop in an office; luminous cyan holographic shield surrounding growing coin stacks and savings chart above the desk. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    },
+    {
+      "name": "esi",
+      "output": "assets/images/services/esi-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: An Indian benefits adviser explaining employee health insurance to an office worker across a desk; luminous cyan holographic medical cross surrounded by a protective circular interface above a tablet. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    },
+    {
+      "name": "lwf",
+      "output": "assets/images/services/lwf-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: Two Indian workplace coordinators with employees on a bright modern manufacturing floor, all wearing appropriate safety helmets; luminous cyan holographic connected employee silhouettes protected by a circular welfare interface, realistic people remain central. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    },
+    {
+      "name": "professional-tax",
+      "output": "assets/images/services/professional-tax-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: Close-up of an Indian accountant using a calculator beside a laptop and printed financial sheets in an office; luminous cyan holographic rupee symbol with subtle numeric-free tax calculation grids hovering above the desk. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    },
+    {
+      "name": "compliance-outsourcing",
+      "output": "assets/images/services/compliance-outsourcing-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: Close-up of an Indian business professional in navy suit typing on a silver laptop in a modern office; a large luminous cyan holographic circular checkmark hub above keyboard connects to smaller digital document, calendar and shield elements, sophisticated workflow technology advertising. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    },
+    {
+      "name": "registrations-renewals",
+      "output": "assets/images/services/registrations-renewals-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: An Indian administrator reviewing paper certificates and a tablet at an office desk; luminous cyan holographic calendar and approved digital document framed in an elegant circular verification interface. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    },
+    {
+      "name": "compliance-audit",
+      "output": "assets/images/services/compliance-audit-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: Close-up of an Indian auditor carefully reviewing paperwork with a pen beside a laptop in an office; luminous cyan holographic checklist with magnification circle and verification markers floats above the paperwork. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    },
+    {
+      "name": "apprentice-management",
+      "output": "assets/images/services/apprentice-management-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: An experienced Indian workplace mentor guiding a young adult apprentice using a laptop in a contemporary technical workshop, both adults wearing safety glasses; subtle luminous cyan holographic connected learning milestones in the foreground. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    },
+    {
+      "name": "hr-training",
+      "output": "assets/images/services/hr-training-photo.webp",
+      "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 photographic banner for an HR services website card. Primary request: Small group of Indian adult HR professionals at an interactive corporate workshop with an instructor and laptop, a welcoming real office meeting room; tasteful translucent cyan holographic learning network and progress chart overlay in the foreground. Style: premium realistic corporate technology stock photography with tasteful digital HUD overlays. Deep navy and cool blue photography with natural office light, restrained cyan glow, realistic humans and materials, sophisticated enterprise advertising. Single coherent photograph, frame edge to edge, main subject centered and readable at small card size. No words, no labels, no logos, no watermarks. No isolated icons, no 3D clay renders, no cartoon style."
+    }
+  ]
+}
