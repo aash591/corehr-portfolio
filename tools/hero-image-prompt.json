@@ -1,0 +1,11 @@
+{
+  "generator": "Built-in image_gen tool",
+  "output": "assets/images/hr-collaboration-photo.webp",
+  "export": {
+    "width": 960,
+    "height": 640,
+    "format": "WebP",
+    "quality": 86
+  },
+  "prompt": "Use case: ads-marketing. Asset type: landscape 3:2 hero photograph for Core HR Management website. A premium photorealistic corporate technology photograph of three Indian adult business professionals, two women and one man, collaborating around a large light wood meeting table in a bright contemporary office. One woman explains a workforce plan to the group using an open laptop, the other colleagues listen and review neatly arranged paperwork. Wider environmental composition than a close-up of a single person, real candid expressions, all hands anatomically natural. Restrained translucent cyan connected workflow lines and a small glowing approval shield hover just above the laptop, grounded in the scene. Refined cool blue and navy tones, natural daylight, realistic materials, no overwhelming neon. Keep all three people readable in a 3:2 crop. No words, no text, no branding, no watermark, no fictitious readable metrics. Single edge-to-edge photograph, not a collage or isolated 3D icon."
+}
