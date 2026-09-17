@@ -12,3 +12,15 @@
 
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
+
+/assets/site.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/site.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/hero-orbit-v2.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/hero-orbit-v2.js
+  Cache-Control: public, max-age=0, must-revalidate
