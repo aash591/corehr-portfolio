@@ -2,9 +2,22 @@
 'use strict';
 document.documentElement.classList.remove('no-js');
 
-var CONFIG={phone:'+91 9292015102',whatsapp:'+919292015102',email:'info@corehrmanagement.in',formProvider:'web3forms',web3formsKey:'7b08424f-cbb4-4e6a-b1ec-d4ba3a31a3e8',formspreeId:'',formEndpoint:'',formExtra:{},mapsEmbedUrl:''};
+// Settings live in assets/config.js (window.COREHR_CONFIG).
+var SETTINGS=window.COREHR_CONFIG||{},CONTACT=SETTINGS.contact||{},FORM=SETTINGS.form||{};
+var CONFIG={phone:CONTACT.phone||'',whatsapp:CONTACT.whatsapp,whatsappMessage:CONTACT.whatsappMessage||'',email:CONTACT.email||'',formProvider:FORM.provider||'',web3formsKey:FORM.web3formsKey||'',formspreeId:FORM.formspreeId||'',formEndpoint:FORM.endpoint||'',formExtra:FORM.extraFields||{},fromName:FORM.fromName||'Core HR Management — website'};
 var $=function(s,c){return(c||document).querySelector(s)};
 var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+// Apply contact settings to the page links; the HTML values stay as the no-JS fallback.
+$$('a[href^="tel:"]').forEach(function(a){if(!CONFIG.phone)return;a.href='tel:'+CONFIG.phone.replace(/[^\d+]/g,'');var b=a.querySelector('b');if(b)b.textContent=CONFIG.phone});
+$$('a[href^="mailto:"]').forEach(function(a){if(!CONFIG.email)return;a.href='mailto:'+CONFIG.email;var b=a.querySelector('b');if(b)b.textContent=CONFIG.email});
+if(!CONFIG.email){var m=$('a[href^="mailto:"]');if(m)CONFIG.email=m.getAttribute('href').slice(7).split('?')[0]}
+$$('a[href^="https://wa.me/"]').forEach(function(a){
+  if(CONFIG.whatsapp===undefined)return;
+  var n=String(CONFIG.whatsapp).replace(/\D/g,'');
+  if(!n){a.remove();return}
+  a.href='https://wa.me/'+n+(CONFIG.whatsappMessage?'?text='+encodeURIComponent(CONFIG.whatsappMessage):'');
+});
 
 var year=$('#year');
 if(year)year.textContent=new Date().getFullYear();
@@ -115,7 +128,7 @@ function request(d){
   Object.keys(CONFIG.formExtra||{}).forEach(function(k){p[k]=CONFIG.formExtra[k]});
   p.subject=subject(d);p.page=location.href;
   if(provider==='web3forms'&&CONFIG.web3formsKey){
-    p.access_key=CONFIG.web3formsKey;p.from_name='Core HR Management — website';p.replyto=d.email||'';p.botcheck='';
+    p.access_key=CONFIG.web3formsKey;p.from_name=CONFIG.fromName;p.replyto=d.email||'';p.botcheck='';
     return{url:'https://api.web3forms.com/submit',payload:p};
   }
   if(provider==='formsubmit'&&CONFIG.email){p._subject=p.subject;p._template='table';p._captcha='false';return{url:'https://formsubmit.co/ajax/'+encodeURIComponent(CONFIG.email),payload:p}}

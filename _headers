@@ -16,6 +16,9 @@
 /assets/site.js
   Cache-Control: public, max-age=0, must-revalidate
 
+/assets/config.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 /assets/site.css
   Cache-Control: public, max-age=0, must-revalidate
 

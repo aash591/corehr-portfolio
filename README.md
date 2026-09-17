@@ -7,6 +7,7 @@ It is a static site, so every free host below works without a build step.
 
 ```
 index.html          the site
+assets/config.js    site settings — contact details and form delivery (edit this)
 logo.webp           brand lockup (the header crops the emblem out of it)
 404.html            not-found page
 robots.txt          crawler rules  ← update the Sitemap host before launch
@@ -24,19 +25,28 @@ tools/              local helper, not published — see "Favicon & share image"
 
 ## 1. Before you launch — the five-minute checklist
 
-Everything configurable sits in one `CONFIG` block near the bottom of
-`index.html` (search for `SITE CONFIG`).
+Everything configurable sits in **`assets/config.js`**. It is loaded before
+`assets/site.js`, and no other file needs to change.
 
 | Setting | What it does |
 |---|---|
-| `phone` | Shown on the contact card, and used for tap-to-call in the mobile bar |
-| `whatsapp` | Digits with country code, no `+`. Blank hides every WhatsApp button |
-| `email` | Where enquiries go, and the address behind the fallback email link |
-| `formProvider` | `web3forms` / `formsubmit` / `formspree` / `custom` / `''` |
-| `web3formsKey` | Your Web3Forms access key — see step 2 |
-| `mapsEmbedUrl` | Empty by default, which hides the map card entirely. Paste a Google Maps embed URL to show it — see below |
+| `contact.phone` | Shown on the Call link as written; the `tel:` link uses its digits |
+| `contact.whatsapp` | Digits with country code, no `+`. Blank removes the WhatsApp link |
+| `contact.whatsappMessage` | Prefilled text when the WhatsApp chat opens |
+| `contact.email` | Shown on the Email link, used for the email fallback, and the inbox for `formsubmit` |
+| `form.provider` | `web3forms` / `formsubmit` / `formspree` / `custom` / `''` |
+| `form.web3formsKey` | Your Web3Forms access key — see step 2 |
+| `form.formspreeId` | Formspree form id |
+| `form.endpoint` | Your own endpoint URL for `custom` |
+| `form.fromName` | Sender name shown in the inbox (Web3Forms) |
+| `form.extraFields` | Extra key/values added to every submission |
 
-Then update these, which are **not** in `CONFIG` because search engines read
+The contact links in `index.html` keep their own copy of the phone, WhatsApp
+and email so they work without JavaScript; the script overwrites them from
+`config.js` on load. `config.js` is public like every file on a static site —
+the Web3Forms key is meant to be public, but never put real secrets there.
+
+Then update these, which are **not** in `config.js` because search engines read
 them from the raw HTML:
 
 - `<link rel="canonical">` and `og:url` in `<head>` — set to your real domain
@@ -55,9 +65,9 @@ provider and paste one value.
 Free tier is 250 submissions/month, no account needed beyond an email address.
 
 1. Go to <https://web3forms.com>, enter the inbox address, and copy the access key.
-2. In `index.html`:
+2. In `assets/config.js`, inside `form`:
    ```js
-   formProvider: 'web3forms',
+   provider: 'web3forms',
    web3formsKey: 'paste-your-access-key-here',
    ```
 3. Deploy, submit a test enquiry, and confirm it lands in the inbox.
@@ -65,8 +75,8 @@ Free tier is 250 submissions/month, no account needed beyond an email address.
 ### FormSubmit — no signup at all
 
 ```js
-formProvider: 'formsubmit',
-email: 'your@address.com',
+form:    { provider: 'formsubmit', ... },
+contact: { email: 'your@address.com', ... },
 ```
 The first submission triggers a one-time confirmation email from FormSubmit —
 click the link in it, and everything after that is delivered silently.
@@ -76,24 +86,23 @@ click the link in it, and everything after that is delivered silently.
 Free tier is 50 submissions/month.
 
 ```js
-formProvider: 'formspree',
+provider: 'formspree',
 formspreeId: 'xdorwkyz',   // the part after /f/ in your form URL
 ```
 
 ### Your own endpoint
 
 ```js
-formProvider: 'custom',
-formEndpoint: 'https://your-worker.example.workers.dev/enquiry',
+provider: 'custom',
+endpoint: 'https://your-worker.example.workers.dev/enquiry',
 ```
 It receives a JSON `POST` with the form fields plus `subject` and `page`.
 
 ### If nothing is configured, or delivery fails
 
-The form never dead-ends. It falls back to a **prefilled email** (and a
-prefilled WhatsApp message when `whatsapp` is set) carrying the whole enquiry,
-and keeps a copy in the visitor's `localStorage`. So a misconfigured key
-costs you a click, not a lead.
+The form never dead-ends. If no provider is configured or delivery fails, it
+shows a link to a **prefilled email** to `contact.email` carrying the whole
+enquiry. So a misconfigured key costs you a click, not a lead.
 
 ### The service picker
 
@@ -113,19 +122,6 @@ match a checkbox `value` exactly** — if you rename a service, update both:
 
 At least one box is required; the picker validates as a unit rather than
 field by field.
-
-### The office map
-
-It is switched off. The card is in the HTML but carries `hidden`, and the script
-only reveals it when `mapsEmbedUrl` has a value. To turn it back on, paste this
-into `CONFIG` and edit the `q=` value:
-
-```js
-mapsEmbedUrl: 'https://www.google.com/maps?q=Edappally%2C%20Ernakulam%2C%20Kerala%20682024&z=14&output=embed'
-```
-
-That keyless form needs no API key or billing account. It loads a Google frame
-that may set its own cookies — the privacy dialog already accounts for that.
 
 ### Spam
 
@@ -210,4 +206,3 @@ update `.brand-logo img` in `index.html`, and re-export the icons.
 Do not publish `tools/` — or leave it, it's harmless and marked `noindex`.
 
 ---
-
