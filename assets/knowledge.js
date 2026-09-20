@@ -36,8 +36,15 @@ chips.forEach(function(chip){
     activeCategory=chip.getAttribute('data-filter')||'all';
     chips.forEach(function(c){c.classList.toggle('is-active',c===chip)});
     apply();
+    if(history.replaceState)history.replaceState(null,'',activeCategory==='all'?location.pathname:'?category='+activeCategory);
   });
 });
 
+var params=new URLSearchParams(location.search);
+var fromUrl=params.get('category');
+if(fromUrl&&chips.some(function(c){return c.getAttribute('data-filter')===fromUrl})){
+  activeCategory=fromUrl;
+  chips.forEach(function(c){c.classList.toggle('is-active',c.getAttribute('data-filter')===fromUrl)});
+}
 apply();
 })();
